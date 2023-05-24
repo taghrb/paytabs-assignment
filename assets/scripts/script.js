@@ -10,13 +10,17 @@ $(document).ready(function () {
 				type: 'POST',
 				data: {category_id: categoryId},
 				dataType: 'json',
-					success: function (response) {
+				success: function (response) {
 					if (response.status === 'success') {
 						var childCategories = response.data;
 
 						if (childCategories.length > 0) {
 							var childSelect = generateCategorySelect(childCategories);
 							$('#category-selects').append(childSelect);
+						}
+					} else {
+						if (response.error_code != 1001) {
+							alert(response.message);
 						}
 					}
 				}
